@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add"
+        android:title="添加下载任务"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/del"
+        android:title="删除数据库"
+        app:showAsAction="never" />
+</menu>
