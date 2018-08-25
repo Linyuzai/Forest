@@ -193,6 +193,7 @@ DownloadTask.toObservable().subscribe({
 DownloadTask.start();
 ```
 也提供Flowable的转换
+
 **额外的监听器**
 ```
 //网速计算
