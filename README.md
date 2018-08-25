@@ -94,6 +94,53 @@ DownloadTask.cancel(true);
 //回收，可以在任务未开始，完成，异常，取消的状态时回收，复用OkHttpClient
 DownloadTask.recycle();
 ```
+**DownloadTask属性**
+```
+//获得DownloadTaskEntity
+DownloadTaskEntity getEntity();
+//running状态时，下载总进度
+long getDownloadBytesTemp();
+//是否是空闲状态
+boolean isIdle();
+//是否是准备状态
+boolean isAttach();
+//是否是下载状态
+boolean isRunning();
+//是否是暂停状态
+boolean isPause();
+//是否完成
+boolean isFinish();
+//是否异常
+boolean isError();
+//是否取消
+boolean isCancel();
+```
+**DownloadTaskEntity属性**
+```
+//TaskId
+String getTaskId();
+//创建时间
+long getCreateTime();
+//执行状态
+int getState();
+//http(s) Headers
+Map<String, String> getHeaders();
+//Url
+String getUrl();
+//URLDecoder
+String getUrlDecoder();
+//文件总大小
+long getTotalBytes();
+//已下载大小，只有暂停，取消，异常时才会更新
+//更新进度请用DownloadTask.getDownloadBytesTemp()
+long getDownloadBytes();
+//文件路径
+String getFilePath();
+//文件名字
+String getFileName();
+//额外数据
+Serializable getExtra();
+```
 使用RxJava2代替DownloadListener和DownloadTaskListener的监听
 ```
 //回调下载进度和任务状态
