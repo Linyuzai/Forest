@@ -6,16 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import eason.linyuzai.download.entity.DownloadTaskEntity;
-import eason.linyuzai.download.task.DownloadTask;
 
 public class SQLiteManager extends DatabaseManager {
 
@@ -80,7 +75,7 @@ public class SQLiteManager extends DatabaseManager {
     }
 
     @Override
-    public List<DownloadTaskEntity> selectAll(DownloadTaskEntity.Creator creator) {
+    public List<? extends DownloadTaskEntity> selectAll(DownloadTaskEntity.Creator creator) {
         List<DownloadTaskEntity> entities = new ArrayList<>();
         Cursor cursor = getDatabase().rawQuery("select * from " + getTableName(), null);
         while (cursor.moveToNext()) {
@@ -120,41 +115,6 @@ public class SQLiteManager extends DatabaseManager {
     public void deleteAll() {
         getDatabase().delete(getTableName(), null, null);
         close();
-    }
-
-    private byte[] fromObject(Object object) {
-        if (object == null)
-            return null;
-        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-        try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arrayOutputStream);
-            objectOutputStream.writeObject(object);
-            objectOutputStream.flush();
-            byte data[] = arrayOutputStream.toByteArray();
-            objectOutputStream.close();
-            arrayOutputStream.close();
-            return data;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T> T toObject(byte[] bytes) {
-        if (bytes == null)
-            return null;
-        ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(bytes);
-        try {
-            ObjectInputStream inputStream = new ObjectInputStream(arrayInputStream);
-            T t = (T) inputStream.readObject();
-            inputStream.close();
-            arrayInputStream.close();
-            return t;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public SQLiteOpenHelper getSQLiteOpenHelper() {

@@ -49,6 +49,10 @@ public abstract class MainThreadDownloadTaskListener implements DownloadTask.Dow
         }, Throwable::printStackTrace);
     }
 
+    public Disposable getDisposable() {
+        return disposable;
+    }
+
     @Override
     public void onDownloadTaskPrepare(DownloadTask task, Observable<ResponseBody> observable) {
         emitter.onNext(DownloadTaskWrapper.taskPrepare(task, observable));

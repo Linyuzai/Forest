@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 import eason.linyuzai.download.database.DatabaseManager;
 import eason.linyuzai.download.entity.DefaultDownloadTaskEntityCreator;
+import eason.linyuzai.download.entity.DownloadTaskEntity;
 import eason.linyuzai.download.factory.OkHttpClientFactory;
 import eason.linyuzai.download.factory.RetrofitFactory;
 import eason.linyuzai.download.file.FileProcessor;
@@ -23,10 +24,7 @@ import eason.linyuzai.download.file.OkioSourceFileProcessor;
 import eason.linyuzai.download.recycle.TaskQueueRecycler;
 import eason.linyuzai.download.recycle.TaskRecycler;
 import eason.linyuzai.download.task.DownloadTask;
-import eason.linyuzai.download.entity.DownloadTaskEntity;
 import eason.linyuzai.download.task.RetrofitDownloadTask;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 
 public class ELoad {
 
@@ -100,7 +98,7 @@ public class ELoad {
             return this;
         }
 
-        public Builder addDownloadTaskListener(RetrofitDownloadTask.DownloadTaskListener downloadTaskListener) {
+        public Builder addDownloadTaskListener(DownloadTask.DownloadTaskListener downloadTaskListener) {
             if (downloadTaskListener != null)
                 this.downloadTaskListeners.add(downloadTaskListener);
             return this;
@@ -175,7 +173,7 @@ public class ELoad {
         return Collections.unmodifiableList(runningTasks);
     }
 
-    public List<DownloadTaskEntity> loadTaskEntitiesFromDatabase() {
+    public List<? extends DownloadTaskEntity> loadTaskEntitiesFromDatabase() {
         if (databaseManager == null) {
             Log.w(TAG, "Database Manager is Null");
             return new ArrayList<>();

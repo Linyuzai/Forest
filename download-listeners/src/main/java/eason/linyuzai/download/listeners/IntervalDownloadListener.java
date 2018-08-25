@@ -35,6 +35,10 @@ public abstract class IntervalDownloadListener<T> implements DownloadTask.Downlo
         this.interval = interval;
     }
 
+    public Disposable getDisposable() {
+        return disposable;
+    }
+
     @Override
     public void onDownloadContentLengthRead(DownloadTask task, long contentLength) {
         time = System.currentTimeMillis();

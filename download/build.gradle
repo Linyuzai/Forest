@@ -49,7 +49,7 @@ publish {
     userOrg =  'linyuzai'  //bintray注册的用户名（不是邮箱）
     groupId =  'eason.linyuzai'
     artifactId =  'eason-download'  //项目名称
-    publishVersion =  '1.0.0'  //版本号
+    publishVersion =  '1.0.1'  //版本号
     desc =  ''  //项目描述。可空。
     website =  ''  //项目地址，一般填github地址。可空。
 }

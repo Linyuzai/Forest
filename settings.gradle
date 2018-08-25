@@ -1,1 +1,1 @@
-include ':app',':easonbar', ':download', ':download-listeners'
+include ':app',':easonbar', ':download', ':download-listeners', ':download-databases-xutils'

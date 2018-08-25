@@ -1,5 +1,9 @@
 package eason.linyuzai.download.database;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 
 import eason.linyuzai.download.entity.DownloadTaskEntity;
@@ -130,7 +134,42 @@ public abstract class DatabaseManager implements DownloadTask.DownloadTaskListen
 
     public abstract int count(DownloadTaskEntity entity);
 
-    public abstract List<DownloadTaskEntity> selectAll(DownloadTaskEntity.Creator creator);
+    public abstract List<? extends DownloadTaskEntity> selectAll(DownloadTaskEntity.Creator creator);
 
     public abstract void deleteAll();
+
+    public static byte[] fromObject(Object object) {
+        if (object == null)
+            return null;
+        ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(arrayOutputStream);
+            objectOutputStream.writeObject(object);
+            objectOutputStream.flush();
+            byte data[] = arrayOutputStream.toByteArray();
+            objectOutputStream.close();
+            arrayOutputStream.close();
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T toObject(byte[] bytes) {
+        if (bytes == null)
+            return null;
+        ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(bytes);
+        try {
+            ObjectInputStream inputStream = new ObjectInputStream(arrayInputStream);
+            T t = (T) inputStream.readObject();
+            inputStream.close();
+            arrayInputStream.close();
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

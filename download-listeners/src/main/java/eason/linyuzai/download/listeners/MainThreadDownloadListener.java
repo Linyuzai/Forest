@@ -29,6 +29,10 @@ public abstract class MainThreadDownloadListener implements DownloadTask.Downloa
         }, Throwable::printStackTrace);
     }
 
+    public Disposable getDisposable() {
+        return disposable;
+    }
+
     @Override
     public final void onDownloadContentLengthRead(DownloadTask task, long contentLength) {
         emitter.onNext(DownloadTaskWrapper.downloadContentLength(task, contentLength));

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="eason_nav" type="id" />
+    <item name="eason_tab" type="id" />
+    <item name="eason_frame" type="id" />
+</resources>
