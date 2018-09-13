@@ -25,6 +25,9 @@
         <activity
             android:name=".test.DownloadTestActivity"
             android:label="下载管理" />
+        <activity
+            android:name=".test.LayoutManagerTestActivity"
+            android:label="FolderLayoutManager" />
     </application>
 
 </manifest>

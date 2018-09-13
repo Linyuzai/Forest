@@ -6,17 +6,16 @@ import okhttp3.ResponseBody;
 import okio.BufferedSink;
 import okio.BufferedSource;
 import okio.Okio;
-import okio.Source;
 
 public class OkioSourceFileProcessor extends FileProcessor {
 
     @Override
     public void writeFile(ResponseBody responseBody, long start, String filePath, String fileName) throws IOException {
         BufferedSink bufferedSink = Okio.buffer(Okio.appendingSink(getOrCreateFile(filePath, fileName)));
-        Source source = Okio.source(responseBody.byteStream());
-        bufferedSink.writeAll(source);
+        BufferedSource bufferedSource = responseBody.source();
+        bufferedSink.writeAll(bufferedSource);
         bufferedSink.flush();
+        bufferedSource.close();
         bufferedSink.close();
-        source.close();
     }
 }

@@ -1,7 +1,6 @@
 package eason.linyuzai.forest.test
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -10,19 +9,18 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.tbruyelle.rxpermissions2.RxPermissions
+import eason.linyuzai.download.entity.DownloadTaskEntity
 import eason.linyuzai.download.listeners.NetPerSecDownloadListener
 import eason.linyuzai.download.listeners.NumberProgressDownloadListener
 import eason.linyuzai.download.listeners.PercentProgressDownloadListener
 import eason.linyuzai.download.listeners.RemainingTimeDownloadListener
-import eason.linyuzai.forest.R
-import eason.linyuzai.forest.eload
-import android.widget.ProgressBar
-import android.widget.TextView
-import eason.linyuzai.download.entity.DownloadTaskEntity
-import eason.linyuzai.download.listener.AbsDownloadTaskListener
 import eason.linyuzai.download.task.DownloadTask
 import eason.linyuzai.download.task.DownloadTaskWrapper
+import eason.linyuzai.forest.R
+import eason.linyuzai.forest.eload
 import io.reactivex.disposables.Disposable
 
 
@@ -65,7 +63,7 @@ class DownloadTestActivity : AppCompatActivity() {
                 permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).filter { it }.subscribe {
                     //http://img.zcool.cn/community/0117e2571b8b246ac72538120dd8a4.jpg@1280w_1l_2o_100sh.jpg
                     //http://192.168.11.139:8080/download
-                    adapter.add(eload().url("http://192.168.11.139:8080/download")
+                    adapter.add(eload().url("http://192.168.5.107:8080/download")
                             .filename("${adapter.itemCount}.apk")
                             .urlDecoder("utf-8").entity())
                     recyclerView.smoothScrollToPosition(adapter.itemCount - 1)

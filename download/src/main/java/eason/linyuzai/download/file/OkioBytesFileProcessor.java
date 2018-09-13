@@ -20,7 +20,7 @@ public class OkioBytesFileProcessor extends BufferBytesFileProcessor {
     @Override
     public void writeFile(ResponseBody responseBody, long start, String filePath, String fileName) throws IOException {
         BufferedSink bufferedSink = Okio.buffer(Okio.appendingSink(getOrCreateFile(filePath, fileName)));
-        BufferedSource bufferedSource = Okio.buffer(Okio.source(responseBody.byteStream()));
+        BufferedSource bufferedSource = responseBody.source();
         byte[] buffer = new byte[getBufferBytesLength()];
         int len;
         while ((len = bufferedSource.read(buffer)) != -1) {

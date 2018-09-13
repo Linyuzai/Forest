@@ -8,5 +8,23 @@
         android:id="@+id/download_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="download  test" />
+        android:text="download" />
+
+    <Button
+        android:id="@+id/layout_manager_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="layout manager" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/scale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="layout manager" />
 </LinearLayout>
